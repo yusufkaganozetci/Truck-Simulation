@@ -1,13 +1,13 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class TrailerHandler : MonoBehaviour
 {
     [SerializeField] Rigidbody truckRB;
+
     public Trailer currentTrailer = null;
 
     public static TrailerHandler Instance;
+
     private void Awake()
     {
         if (Instance == null) Instance = this;
@@ -20,7 +20,6 @@ public class TrailerHandler : MonoBehaviour
             currentTrailer = trailer;
             currentTrailer.ConnectTrailer(truckRB);
         }
-        
     }
 
     public void DisconnectTrailer()

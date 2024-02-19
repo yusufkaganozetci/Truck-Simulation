@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
@@ -11,9 +9,10 @@ public class SpeedMeter : MonoBehaviour
     [SerializeField] float minSpeedMeterRotation;
     [SerializeField] float maxSpeed;
 
+    private float currentRotationVelocity = 0.0f;
+
     public static SpeedMeter Instance;
 
-    private float currentRotationVelocity = 0.0f;
     private void Awake()
     {
         if(Instance == null) Instance = this;
@@ -26,7 +25,6 @@ public class SpeedMeter : MonoBehaviour
         float targetRotationAmount = maxSpeedMeterRotation - (speed * wholeAreaAsDegree / 130);
         float newRotationAmount = Mathf.SmoothDampAngle(speedIndicator.rotation.eulerAngles.z, targetRotationAmount, ref currentRotationVelocity, 0.1f);
         speedIndicator.rotation = Quaternion.Euler(0, 0, newRotationAmount);
-        //speedText.text = ((int)speed).ToString();
     }
 
 }

@@ -1,6 +1,4 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
@@ -42,24 +40,19 @@ public class TruckController : MonoBehaviour
 {
     [SerializeField] Wheel[] wheels;
     [SerializeField] Transform steering;
-
     [SerializeField] float acceleration = 500;
     [SerializeField] float brakeForce = 300;
     [SerializeField] float maxTurnAngle = 15;
-
     [SerializeField] float maxSpeed = 130;
+    [SerializeField] float maxSteeringWheelTurnAngle = 540;
+    [SerializeField] float speedMultiplier = 5;
 
-    [SerializeField] TextMeshProUGUI speedText;
-
+    private WheelHelper wheelHelper = new WheelHelper();
+    private Rigidbody rb;
     private float currentAcceleration = 0;
     private float currentBrakeForce = 0;
     private float currentTurnAngle = 0;
 
-
-    private WheelHelper wheelHelper = new WheelHelper();
-
-    private Rigidbody rb;
-    // Start is called before the first frame update
     void Start()
     {
         rb = GetComponent<Rigidbody>();
@@ -79,9 +72,9 @@ public class TruckController : MonoBehaviour
     private void UpdateSteering()
     {
         Vector3 steeringRot = steering.transform.rotation.eulerAngles;
-        float rot = 540 * currentTurnAngle / maxTurnAngle;
+        float rot = maxSteeringWheelTurnAngle * currentTurnAngle / maxTurnAngle;
         steering.transform.rotation = Quaternion.Euler(steeringRot.x
-            , steeringRot.y, rot);// - transform.rotation;
+            , steeringRot.y, rot);
     }
     
     private void Turn()
@@ -109,12 +102,11 @@ public class TruckController : MonoBehaviour
             wheelHelper.GetWheelByType(wheels, WheelType.BackLeft).
                 wheelCollider.motorTorque = currentAcceleration;
         }
-        
     }
 
     private float GetCurrentVelocity()
     {
-        return rb.velocity.magnitude * 5;
+        return rb.velocity.magnitude * speedMultiplier;
     }
 
     private void ManageInputs()
@@ -129,7 +121,6 @@ public class TruckController : MonoBehaviour
         {
             currentBrakeForce = 0;
         }
-        
     }
 
     private void UpdateWheelMeshes()
@@ -142,4 +133,5 @@ public class TruckController : MonoBehaviour
             wheels[i].wheelMeshTransform.SetPositionAndRotation(position, rotation);
         }
     }
+
 }

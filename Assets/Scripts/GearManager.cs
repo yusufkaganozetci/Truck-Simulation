@@ -1,6 +1,4 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -10,7 +8,6 @@ public enum GearType
     Drive,//D
     Reverse,//R
 }
-
 
 [Serializable]
 public class Gear
@@ -45,12 +42,10 @@ public class GearHelper
 public class GearManager : MonoBehaviour
 {
     [SerializeField] Gear[] gears;
-
     [SerializeField] Color gearChosenColor;
     [SerializeField] Color gearNotChosenColor;
 
     private Gear currentGear;
-
     private GearHelper gearHelper = new GearHelper();
 
     public static GearManager Instance;

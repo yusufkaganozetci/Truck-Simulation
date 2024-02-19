@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -12,9 +10,9 @@ public class GasPedal : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
     public bool isPressing = false;
     public float accelerationDirection = 0;
 
-    public static GasPedal Instance;
-
     private Image gasPedalImage;
+
+    public static GasPedal Instance;
 
     private void Awake()
     {
@@ -40,4 +38,5 @@ public class GasPedal : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
         accelerationDirection = 0;
         gasPedalImage.sprite = gasPedalNotPressedSprite;
     }
+
 }

@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -9,11 +7,12 @@ public class BrakePedal : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
     [SerializeField] Sprite brakePedalPressedSprite;
     [SerializeField] Sprite brakePedalNotPressedSprite;
 
-    public static BrakePedal Instance;
-
     public bool isPressing = false;
 
     private Image brakePedalImage;
+
+    public static BrakePedal Instance;
+
     private void Awake()
     {
         if (Instance == null) Instance = this;
@@ -36,4 +35,5 @@ public class BrakePedal : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
         isPressing = false;
         brakePedalImage.sprite = brakePedalNotPressedSprite;
     }
+
 }

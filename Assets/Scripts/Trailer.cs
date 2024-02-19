@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Trailer : MonoBehaviour
@@ -23,10 +21,10 @@ public class Trailer : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        Debug.Log(other.tag);
         if (other.CompareTag("TruckConnectionPoint"))
         {
             TrailerHandler.Instance.ConnectTrailer(this);
         }
     }
+
 }
